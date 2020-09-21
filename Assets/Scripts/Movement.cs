@@ -11,7 +11,8 @@ public class Movement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Application.targetFrameRate = 120;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
