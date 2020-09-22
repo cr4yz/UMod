@@ -1,8 +1,9 @@
+using System;
 using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
-public class Movement : MonoBehaviour
+public class Movement : TimeStepMonoBehaviour
 {
 
     [Header("Movement Configuration")]
@@ -24,11 +25,16 @@ public class Movement : MonoBehaviour
     [HideInInspector]
     public Vector3 MoveVector;
 
+    private MovementButtons _buttonsDown;
+    private Vector3 _previousOrigin;
+
+    public Vector3 Origin { get; set; }
+    public Vector3 Angles { get; set; }
     public bool Grounded { get; private set; }
     public bool Surfing { get; private set; }
     public bool JustJumped { get; private set; }
 
-    void Start()
+    protected override void OnStart()
     {
         if (!Collider)
         {
@@ -36,40 +42,92 @@ public class Movement : MonoBehaviour
         }
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        Origin = transform.position;
+        Angles = transform.rotation.eulerAngles;
     }
 
-    void Update()
+    protected override void OnFrame()
     {
         TryMouseLook();
+        _buttonsDown = GetButtons();
+
+        Camera.main.transform.rotation = Quaternion.Euler(Angles);
+        transform.position = Vector3.Lerp(_previousOrigin, Origin, Alpha);
+    }
+
+    protected override void OnTick()
+    {
         CheckForGravity();
         CheckForGround();
         CheckForJump();
 
-        var inputVector = GetInputVector();
+        var inputVector = GetInputVector(_buttonsDown);
         var wishDir = inputVector.normalized;
         var wishSpeed = inputVector.magnitude;
 
         if (Grounded)
         {
-            MoveVector = GroundAccelerate(MoveVector, wishDir, wishSpeed, Acceleration, Time.deltaTime, 1f);
-            MoveVector = AddFriction(MoveVector, StopSpeed, Friction, Time.deltaTime);
+            MoveVector = GroundAccelerate(MoveVector, wishDir, wishSpeed, Acceleration, base.FixedDeltaTime, 1f);
+            MoveVector = AddFriction(MoveVector, StopSpeed, Friction, base.FixedDeltaTime);
         }
         else
         {
-            MoveVector = AirAccelerate(MoveVector, wishDir, wishSpeed, AirAcceleration, AirCap, Time.deltaTime);
+            MoveVector = AirAccelerate(MoveVector, wishDir, wishSpeed, AirAcceleration, AirCap, base.FixedDeltaTime);
         }
 
         //MoveVector = ClampVelocity(MoveVector, MoveSpeed);
-        transform.position += MoveVector * Time.deltaTime;
+        _previousOrigin = Origin;
+        Origin += MoveVector * base.FixedDeltaTime;
 
         ResolveCollisions();
     }
 
-    private Vector3 GetInputVector()
+    private MovementButtons GetButtons()
     {
+        var result = MovementButtons.None;
+
         var sideMove = Input.GetAxisRaw("Horizontal");
         var forwardMove = Input.GetAxisRaw("Vertical");
-        var inputVector = new Vector3(sideMove, 0, forwardMove) * MoveSpeed;
+
+        if(sideMove > 0)
+        {
+            result |= MovementButtons.Right;
+        }
+        else if(sideMove < 0)
+        {
+            result |= MovementButtons.Left;
+        }
+
+        if(forwardMove > 0)
+        {
+            result |= MovementButtons.Forward;
+        }
+        else if(forwardMove < 0)
+        {
+            result |= MovementButtons.Back;
+        }
+
+        if(Input.GetAxisRaw("Jump") > 0)
+        {
+            result |= MovementButtons.Jump;
+        }
+
+        return result;
+    }
+
+    private Vector3 GetInputVector(MovementButtons buttons)
+    {
+        var sideMove = _buttonsDown.HasFlag(MovementButtons.Right)
+            ? MoveSpeed
+            : _buttonsDown.HasFlag(MovementButtons.Left) 
+            ? -MoveSpeed 
+            : 0;
+        var fwdMove = _buttonsDown.HasFlag(MovementButtons.Forward)
+            ? MoveSpeed
+            : _buttonsDown.HasFlag(MovementButtons.Back)
+            ? -MoveSpeed
+            : 0;
+        var inputVector = new Vector3(sideMove, 0, fwdMove);
         inputVector = Camera.main.transform.TransformDirection(inputVector);
         inputVector.y = 0;
         return inputVector;
@@ -83,17 +141,15 @@ public class Movement : MonoBehaviour
         }
         var mouseX = Input.GetAxisRaw("Mouse X");
         var mouseY = -Input.GetAxisRaw("Mouse Y");
-        var rot = Camera.main.transform.eulerAngles;
         var rotationVector = new Vector3(mouseY, mouseX, 0);
-        rot += rotationVector * MouseSensitivity;
-        Camera.main.transform.rotation = Quaternion.Euler(rot);
+        Angles += rotationVector * MouseSensitivity;
     }
 
     private void CheckForGravity()
     {
         if (!Grounded)
         {
-            MoveVector.y -= Gravity * Time.deltaTime;
+            MoveVector.y -= Gravity * base.FixedDeltaTime;
         }
     }
 
@@ -101,7 +157,7 @@ public class Movement : MonoBehaviour
     {
         JustJumped = false;
 
-        if (Grounded && Input.GetAxisRaw("Jump") > 0)
+        if (Grounded && _buttonsDown.HasFlag(MovementButtons.Jump))
         {
             MoveVector.y += JumpPower;
             Grounded = false;
@@ -148,7 +204,7 @@ public class Movement : MonoBehaviour
             var surfHits = hits.ToList().FindAll(x => x.normal.y < 0.7f && x.point != Vector3.zero).OrderBy(x => x.distance);
             if (surfHits.Count() > 0)
             {
-                transform.position += surfHits.First().normal * 0.02f;
+                Origin += surfHits.First().normal * 0.02f;
                 MoveVector = ClipVelocity(MoveVector, surfHits.First().normal, 1.0f);
                 Surfing = true;
             }
@@ -165,7 +221,7 @@ public class Movement : MonoBehaviour
             {
                 continue;
             }
-            if(Physics.ComputePenetration(Collider, transform.position, Quaternion.identity, other, other.transform.position, other.transform.rotation, out Vector3 direction, out float distance))
+            if(Physics.ComputePenetration(Collider, Origin, Quaternion.identity, other, other.transform.position, other.transform.rotation, out Vector3 direction, out float distance))
             {
                 if (Vector3.Dot(direction, MoveVector.normalized) > 0)
                 {
@@ -176,7 +232,7 @@ public class Movement : MonoBehaviour
 
                 if (!Surfing)
                 {
-                    transform.position += penetrationVector;
+                    Origin += penetrationVector;
                     MoveVector -= Vector3.Project(MoveVector, -direction);
                 }
                 else

@@ -5000,7 +5000,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.5
+  m_Radius: 0.65
   m_Height: 2.7595067
   m_Direction: 1
   m_Center: {x: 0, y: 0.37975335, z: 0}
@@ -5061,7 +5061,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 339323439}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.93, y: 16.78, z: -21.88}
+  m_LocalPosition: {x: -3.93, y: 18.88, z: -21.88}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1911220394}
@@ -34290,13 +34290,13 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 6000
+  m_Intensity: 1000
   m_EnableSpotReflector: 0
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
   m_SpotIESCutoffPercent: 100
   m_LightDimmer: 1
-  m_VolumetricDimmer: 6.3
+  m_VolumetricDimmer: 0
   m_LightUnit: 0
   m_FadeDistance: 10000
   m_AffectDiffuse: 1
@@ -34397,8 +34397,8 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 477.4648
+  m_Color: {r: 0.99782133, g: 0, b: 1, a: 1}
+  m_Intensity: 79.57747
   m_Range: 13.8
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
