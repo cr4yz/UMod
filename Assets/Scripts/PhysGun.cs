@@ -36,6 +36,11 @@ public class PhysGun : MonoBehaviour
 
     void Update()
     {
+        if (GUIManager.Instance.GUIHasCursor())
+        {
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             Grab();
