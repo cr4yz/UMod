@@ -366,7 +366,7 @@ MonoBehaviour:
   m_AdvancedMode: 0
   mode:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 3
   toeStrength:
     m_OverrideState: 0
     m_Value: 0
@@ -374,7 +374,7 @@ MonoBehaviour:
     max: 1
   toeLength:
     m_OverrideState: 0
-    m_Value: 0.5
+    m_Value: 0.477
     min: 0
     max: 1
   shoulderStrength:
@@ -387,13 +387,13 @@ MonoBehaviour:
     m_Value: 0.5
     min: 0
   shoulderAngle:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 0.478
     min: 0
     max: 1
   gamma:
-    m_OverrideState: 0
-    m_Value: 1
+    m_OverrideState: 1
+    m_Value: 1.1
     min: 0.001
   lutTexture:
     m_OverrideState: 0
