@@ -18,4 +18,7 @@ public class BspToUnityOptions
     public Material SkyboxMaterial;
     public Material FaceMaterial;
     public Material WaterMaterial;
+
+    [Header("Entity Options")]
+    public Light Sun;
 }

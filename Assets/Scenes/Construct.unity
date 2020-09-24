@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 10585.137, g: 10594.156, b: 12632.734, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -403,9 +403,9 @@ Light:
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 2
-  m_AreaSize: {x: 1, y: 1}
+  m_AreaSize: {x: 0.5, y: 0.5}
   m_BounceIntensity: 1
-  m_ColorTemperature: 6500
+  m_ColorTemperature: 6755
   m_UseColorTemperature: 1
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
@@ -793,7 +793,7 @@ MonoBehaviour:
     WorldScale: 0.0254
     WithModels: 1
     WithDisplacements: 1
-    WithLightmaps: 1
+    WithLightmaps: 0
     WithConvexColliders: 1
     WithEntities: 1
     GamesToMount:
@@ -801,6 +801,7 @@ MonoBehaviour:
     SkyboxMaterial: {fileID: 2100000, guid: 5b406f2552562a444a53b7cbe73dc8f3, type: 2}
     FaceMaterial: {fileID: 2100000, guid: c3560fa1b58110a4c8f08a259a29a9c9, type: 2}
     WaterMaterial: {fileID: 2100000, guid: a77c7534227eba34abbf5f61e1619b33, type: 2}
+    Sun: {fileID: 157207113}
 --- !u!4 &2030249633
 Transform:
   m_ObjectHideFlags: 0

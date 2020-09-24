@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using UnityEngine;
+using SourceUtils.ValveBsp.Entities;
 
 public partial class BspToUnity
 {
@@ -58,6 +59,7 @@ public partial class BspToUnity
                 if(component is BspEntityMonoBehaviour bspEntity)
                 {
                     bspEntity.Entity = e;
+                    bspEntity.BspOptions = _options;
                 }
             }
         }
