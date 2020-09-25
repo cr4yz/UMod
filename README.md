@@ -1,8 +1,6 @@
 # Umod
- This is the repository for a game development/c# series that will go on until the release of S&box.  By that time you will have learned many things that can be transferred to development of mods and gamemodes for S&box, and we will begin new tutorials that dig into S&box rather than Unity.  
+Umod is a sandbox game inspired by Garry's Mod and built on Unity + High Definition Render Pipeline.  Check out the devblogs and dig through the source code to learn more about it!
 
- But for now, let's create Garry's Mod in Unity.
-
-# YouTube tutorial
- Link is here: https://www.youtube.com/playlist?list=PLmk7ibDcqazcZkCCmeDWvkJWT2gK-go25
+# DevBlogs
+ https://www.youtube.com/playlist?list=PLmk7ibDcqazcZkCCmeDWvkJWT2gK-go25
  
