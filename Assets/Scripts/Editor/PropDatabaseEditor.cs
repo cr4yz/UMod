@@ -40,6 +40,7 @@ public class PropDatabaseEditor : Editor
             props.Add(prop);
         }
         propDatabase.Props = props.ToArray();
+        serializedObject.ApplyModifiedProperties();
     }
 
 }

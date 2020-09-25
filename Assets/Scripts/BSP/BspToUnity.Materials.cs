@@ -113,7 +113,8 @@ public partial class BspToUnity
             result = GameObject.Instantiate(materialResource) as Material;
         }
 
-        result.SetTexture("_MainTex", LoadTexture(resourceLoader, baseTex));
+        //result.SetTexture("_MainTex", LoadTexture(resourceLoader, baseTex));
+        result.mainTexture = LoadTexture(resourceLoader, baseTex);
         result.SetFloat("_Smoothness", 0);
         result.SetFloat("_Metallic", .8f);
         result.name = vmtPath;
