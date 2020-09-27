@@ -20,10 +20,12 @@ public class PropDatabaseEditor : Editor
 
     private void Generate()
     {
-        var propDatabase = base.target as PropDatabase;
+        var propsArray = serializedObject.FindProperty("Props");
         var propsPath = Application.dataPath + "/Resources/Props/";
         var files = Directory.GetFiles(propsPath, "*.*", SearchOption.AllDirectories).Where(x => !x.Contains(".meta"));
         var props = new List<Prop>();
+        var idx = 0;
+        propsArray.arraySize = files.Count();
         foreach(var file in files)
         {
             var name = Path.GetFileNameWithoutExtension(file);
@@ -31,15 +33,12 @@ public class PropDatabaseEditor : Editor
             var tags = string.Join(",", relativePath.Split('\\').Reverse().Skip(1).ToArray());
             var objectPath = Path.ChangeExtension("Props\\" + relativePath, null);
             var resource = Resources.Load(objectPath);
-            var prop = new Prop()
-            {
-                Name = name,
-                Tags = tags,
-                Object = resource
-            };
-            props.Add(prop);
+            var el = propsArray.GetArrayElementAtIndex(idx);
+            el.FindPropertyRelative("Name").stringValue = name;
+            el.FindPropertyRelative("Tags").stringValue = tags;
+            el.FindPropertyRelative("Object").objectReferenceValue = resource;
+            idx++;
         }
-        propDatabase.Props = props.ToArray();
         serializedObject.ApplyModifiedProperties();
     }
 
