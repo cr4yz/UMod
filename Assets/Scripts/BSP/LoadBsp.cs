@@ -11,12 +11,13 @@ public class LoadBsp : MonoBehaviour
 
     public BspToUnityOptions Options;
 
-    private void Awake()
+    private void Start()
     {
         if (!string.IsNullOrEmpty(MapDirectory))
         {
             Options.FilePath = Path.Combine(MapDirectory, Options.FilePath);
         }
         var bspRoot = new BspToUnity(Options).Generate();
+        bspRoot.transform.SetParent(transform, true);
     }
 }

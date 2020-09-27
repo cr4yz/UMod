@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.HighDefinition;
 
 public class PropSpawner : GUIMonoBehaviour
 {
@@ -91,7 +92,8 @@ public class PropSpawner : GUIMonoBehaviour
                     mc.convex = true;
                 }
             }
-            clone.transform.position = Camera.main.transform.position + Camera.main.transform.forward * b.size.magnitude;
+            var playerCamera = Camera.allCameras.FirstOrDefault(x => x.CompareTag("Player"));
+            clone.transform.position = playerCamera.transform.position + playerCamera.transform.forward * b.size.magnitude;
         }
     }
 

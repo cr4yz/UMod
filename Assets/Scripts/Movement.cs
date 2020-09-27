@@ -20,6 +20,7 @@ public class Movement : TimeStepMonoBehaviour
     public float MouseSensitivity = 1f;
 
     [Header("Other")]
+    public Camera Camera;
     public Collider Collider;
 
     [HideInInspector]
@@ -34,12 +35,13 @@ public class Movement : TimeStepMonoBehaviour
     public bool Surfing { get; private set; }
     public bool JustJumped { get; private set; }
 
-    protected override void OnStart()
+    private void Start()
     {
         if (!Collider)
         {
             Collider = GetComponent<Collider>();
         }
+
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         Origin = transform.position;
@@ -48,11 +50,11 @@ public class Movement : TimeStepMonoBehaviour
 
     protected override void OnFrame()
     {
-        TryMouseLook();
+        TryMouseLook(GetMouseDelta());
         _buttonsDown = GetButtons();
 
-        Camera.main.transform.rotation = Quaternion.Euler(Angles);
-        transform.position = Vector3.Lerp(_previousOrigin, Origin, Alpha);
+        Camera.transform.rotation = Quaternion.Euler(Angles);
+        transform.position = Vector3.Lerp(_previousOrigin, Origin, base.Alpha);
     }
 
     protected override void OnTick()
@@ -80,6 +82,11 @@ public class Movement : TimeStepMonoBehaviour
         Origin += MoveVector * base.FixedDeltaTime;
 
         ResolveCollisions();
+    }
+
+    private Vector2 GetMouseDelta()
+    {
+        return new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
     }
 
     private MovementButtons GetButtons()
@@ -128,20 +135,18 @@ public class Movement : TimeStepMonoBehaviour
             ? -MoveSpeed
             : 0;
         var inputVector = new Vector3(sideMove, 0, fwdMove);
-        inputVector = Camera.main.transform.TransformDirection(inputVector);
+        inputVector = Camera.transform.TransformDirection(inputVector);
         inputVector.y = 0;
         return inputVector;
     }
 
-    private void TryMouseLook()
+    private void TryMouseLook(Vector2 mouseDelta)
     {
         if(Cursor.lockState != CursorLockMode.Locked)
         {
             return;
         }
-        var mouseX = Input.GetAxisRaw("Mouse X");
-        var mouseY = -Input.GetAxisRaw("Mouse Y");
-        var rotationVector = new Vector3(mouseY, mouseX, 0);
+        var rotationVector = new Vector3(-mouseDelta.y, mouseDelta.x, 0);
         Angles += rotationVector * MouseSensitivity;
     }
 
@@ -213,7 +218,7 @@ public class Movement : TimeStepMonoBehaviour
 
     private void ResolveCollisions()
     {
-        var overlaps = Physics.OverlapBox(Collider.bounds.center, Collider.bounds.extents, Quaternion.identity, (1 << 0));
+        var overlaps = Physics.OverlapBox(Collider.bounds.center, Collider.bounds.extents, Quaternion.identity, 1 << 0);
 
         foreach (var other in overlaps)
         {

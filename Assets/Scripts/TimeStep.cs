@@ -1,39 +1,40 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class TimeStep : SingletonComponent<TimeStep>
 {
-
     // Elapsed Time, Delta Time
     public UnityEvent<float, float> OnTick = new UnityEvent<float, float>();
     // Elapsed Time, Delta Time, Alpha
     public UnityEvent<float, float, float> OnFrame = new UnityEvent<float, float, float>();
     public int TickRate = 100;
 
-    private float _elapsedTime;
     private float _accumulator;
-    private float _alpha;
+
+    public float ElapsedTime { get; private set; }
+    public float DeltaTime { get; private set; }
+    public float FixedDeltaTime { get; private set; }
+    public float Alpha { get; private set; }
 
     void Update()
     {
-        var fixedDeltaTime = 1f / TickRate;
+        DeltaTime = Time.deltaTime;
+        FixedDeltaTime = 1f / TickRate;
+
         var newTime = Time.realtimeSinceStartup;
-        var frameTime = Mathf.Min(newTime - _elapsedTime, fixedDeltaTime);
-        
-        _elapsedTime = newTime;
+        var frameTime = Mathf.Min(newTime - ElapsedTime, FixedDeltaTime);
+
+        ElapsedTime = newTime;
         _accumulator += frameTime;
 
-        while (_accumulator >= fixedDeltaTime)
+        while (_accumulator >= FixedDeltaTime)
         {
-            _accumulator -= fixedDeltaTime;
-            OnTick?.Invoke(_elapsedTime, fixedDeltaTime);
+            _accumulator -= FixedDeltaTime;
+            OnTick?.Invoke(ElapsedTime, FixedDeltaTime);
         }
-        _alpha = _accumulator / fixedDeltaTime;
+        Alpha = _accumulator / FixedDeltaTime;
 
-        OnFrame?.Invoke(_elapsedTime, Time.deltaTime, _alpha);
+        OnFrame?.Invoke(ElapsedTime, DeltaTime, Alpha);
     }
 
 }

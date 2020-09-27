@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 3279.8047, g: 3617.17, b: 4999.4766, a: 1}
+  m_IndirectSpecularColor: {r: 3472.1025, g: 3809.295, b: 5186.172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -766,7 +766,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7382155725539468140, guid: 6e281cb6b0f49544ba782d53928b0853, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.98
+      value: -320
       objectReference: {fileID: 0}
     - target: {fileID: 7382155725539468140, guid: 6e281cb6b0f49544ba782d53928b0853, type: 3}
       propertyPath: m_LocalPosition.z
@@ -886,7 +886,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MapDirectory: C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\maps\
   Options:
-    FilePath: gm_construct
+    FilePath: gm_flatgrass
     WorldScale: 0.0254
     WithModels: 1
     WithDisplacements: 1

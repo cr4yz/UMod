@@ -1,15 +1,14 @@
 using UnityEngine;
 
-public class PhysGun : MonoBehaviour
+public class PhysGun : ItemMonoBehaviour
 {
+    [Header("PhysGun Properties")]
     [SerializeField]
     private float _maxGrabDistance = 40f;
     [SerializeField]
     private float _minGrabDistance = 1f;
     [SerializeField]
     private LineRenderer _pickLine;
-    [SerializeField]
-    private Transform _barrelPoint;
 
     private Rigidbody _grabbedObject;
     private float _pickDistance;
@@ -19,10 +18,6 @@ public class PhysGun : MonoBehaviour
 
     private void Start()
     {
-        if (!_barrelPoint)
-        {
-            _barrelPoint = transform;
-        }
         if (!_pickLine)
         {
             var obj = new GameObject("PhysGun Pick Line");
@@ -34,35 +29,36 @@ public class PhysGun : MonoBehaviour
         }
     }
 
-    void Update()
+    protected override void OnKeyDown(KeyCode button)
     {
-        if (GUIManager.Instance.GUIHasCursor())
+        switch (button) 
         {
-            return;
+            case KeyCode.Mouse0:
+                Grab();
+                ViewModel.Kick();
+                break;
         }
+    }
 
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+    protected override void OnKeyUp(KeyCode button)
+    {
+        switch (button)
         {
-            Grab();
+            case KeyCode.Mouse0:
+            case KeyCode.Mouse1:
+                if (_grabbedObject)
+                {
+                    Release(button == KeyCode.Mouse1);
+                    ViewModel.Kick(-.2f);
+                }
+                break;
         }
+    }
 
-        if (Input.GetKeyUp(KeyCode.Mouse0))
-        {
-            if (_grabbedObject)
-            {
-                Release();
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Mouse1))
-        {
-            if (_grabbedObject)
-            {
-                Release(true);
-            }
-        }
-
-        _pickDistance = Mathf.Clamp(_pickDistance + Input.mouseScrollDelta.y, _minGrabDistance, _maxGrabDistance);
+    protected override void OnScrollDelta(float delta)
+    {
+        _pickDistance = Mathf.Clamp(_pickDistance + delta, _minGrabDistance, _maxGrabDistance);
+        ViewModel.Kick(.2f * delta < 0 ? -1 : 1);
     }
 
     private void LateUpdate()
@@ -71,7 +67,7 @@ public class PhysGun : MonoBehaviour
         {
             var midpoint = (transform.position + _pickTargetPosition) / 2f;
             midpoint += Vector3.ClampMagnitude(_pickForce / 2f, 1f);
-            DrawQuadraticBezierCurve(_pickLine, _barrelPoint.position, midpoint, _grabbedObject.worldCenterOfMass - _pickOffset);
+            DrawQuadraticBezierCurve(_pickLine, ViewModel.BarrelPosition, midpoint, _grabbedObject.worldCenterOfMass - _pickOffset);
         }
     }
 
@@ -79,7 +75,7 @@ public class PhysGun : MonoBehaviour
     {
         if (_grabbedObject != null)
         {
-            var ray = Camera.main.ViewportPointToRay(Vector3.one * .5f);
+            var ray = PlayerCamera.ViewportPointToRay(Vector3.one * .5f);
             _pickTargetPosition = (ray.origin + ray.direction * _pickDistance) + _pickOffset;
             var forceDir = _pickTargetPosition - _grabbedObject.position;
             _pickForce = forceDir / Time.fixedDeltaTime * 0.3f / _grabbedObject.mass;
@@ -89,8 +85,8 @@ public class PhysGun : MonoBehaviour
 
     private void Grab()
     {
-        var ray = Camera.main.ViewportPointToRay(Vector3.one * .5f);
-        if(Physics.Raycast(ray, out RaycastHit hit, _maxGrabDistance)
+        var ray = PlayerCamera.ViewportPointToRay(Vector3.one * .5f);
+        if(Physics.Raycast(ray, out RaycastHit hit, _maxGrabDistance, layerMask: 1 << 0)
             && hit.rigidbody != null)
         {
             _pickOffset = hit.rigidbody.worldCenterOfMass - hit.point;
