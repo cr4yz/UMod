@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -24,7 +25,7 @@ public class ItemManager : MonoBehaviour
         {
             item.gameObject.SetActive(false);
         }
-        EquipNextItem();
+        StartCoroutine(EquipNextItem());
     }
 
     private void Update()
@@ -33,12 +34,12 @@ public class ItemManager : MonoBehaviour
         {
             if (Input.GetKeyDown(kvp.Key))
             {
-                EquipNextItem(kvp.Value);
+                StartCoroutine(EquipNextItem(kvp.Value));
             }
         }
     }
 
-    private void EquipNextItem(int slot = -1)
+    private IEnumerator EquipNextItem(int slot = -1)
     {
         ItemMonoBehaviour nextItem = null;
 
@@ -55,18 +56,18 @@ public class ItemManager : MonoBehaviour
             nextItem = _items.FirstOrDefault(x => slot == -1 || x.SlotNumber == slot);
             if (!nextItem)
             {
-                return;
+                yield break;
             }
         }
 
         if (_activeItem)
         {
-            _activeItem.Hide();
+            yield return _activeItem.Hide();
         }
 
         _activeItem = nextItem;
         _activeItem.gameObject.SetActive(true);
-        _activeItem.Show();
+        yield return _activeItem.Show();
     }
 
 }

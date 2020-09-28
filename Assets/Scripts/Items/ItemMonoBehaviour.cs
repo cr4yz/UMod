@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -43,20 +44,32 @@ public class ItemMonoBehaviour : MonoBehaviour
         ReleaseAllInput();
     }
 
-    public void Show()
+    public IEnumerator Show()
     {
+        bool complete = false;
         LeanTween.moveLocalY(gameObject, 0f, .25f).setOnComplete(() =>
         {
             gameObject.SetActive(true);
+            complete = true;
         }).setEase(LeanTweenType.easeOutBack);
+        while (!complete)
+        {
+            yield return null;
+        }
     }
 
-    public void Hide()
+    public IEnumerator Hide()
     {
-        LeanTween.moveLocalY(gameObject, -5f, .25f).setOnComplete(() =>
+        bool complete = false;
+        LeanTween.moveLocalY(gameObject, -2f, .25f).setOnComplete(() =>
         {
             gameObject.SetActive(false);
+            complete = true;
         }).setEase(LeanTweenType.easeOutBack);
+        while (!complete)
+        {
+            yield return null;
+        }
     }
 
     private void ReleaseAllInput()

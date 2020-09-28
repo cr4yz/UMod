@@ -13,6 +13,7 @@ public class PhysGun : ItemMonoBehaviour
     private Rigidbody _grabbedObject;
     private float _pickDistance;
     private Vector3 _pickOffset;
+    private Quaternion _rotationOffset;
     private Vector3 _pickTargetPosition;
     private Vector3 _pickForce;
 
@@ -65,9 +66,8 @@ public class PhysGun : ItemMonoBehaviour
     {
         if (_grabbedObject)
         {
-            var midpoint = (transform.position + _pickTargetPosition) / 2f;
-            midpoint += Vector3.ClampMagnitude(_pickForce / 2f, 1f);
-            DrawQuadraticBezierCurve(_pickLine, ViewModel.BarrelPosition, midpoint, _grabbedObject.worldCenterOfMass - _pickOffset);
+            var midpoint = PlayerCamera.transform.position + PlayerCamera.transform.forward * _pickDistance * .5f;
+            DrawQuadraticBezierCurve(_pickLine, ViewModel.BarrelPosition, midpoint, _grabbedObject.position + _grabbedObject.transform.TransformVector(_pickOffset));
         }
     }
 
@@ -76,10 +76,12 @@ public class PhysGun : ItemMonoBehaviour
         if (_grabbedObject != null)
         {
             var ray = PlayerCamera.ViewportPointToRay(Vector3.one * .5f);
-            _pickTargetPosition = (ray.origin + ray.direction * _pickDistance) + _pickOffset;
+            _pickTargetPosition = (ray.origin + ray.direction * _pickDistance) - _grabbedObject.transform.TransformVector(_pickOffset);
             var forceDir = _pickTargetPosition - _grabbedObject.position;
             _pickForce = forceDir / Time.fixedDeltaTime * 0.3f / _grabbedObject.mass;
             _grabbedObject.velocity = _pickForce;
+            _grabbedObject.transform.rotation = PlayerCamera.transform.rotation * _rotationOffset;
+            
         }
     }
 
@@ -89,7 +91,8 @@ public class PhysGun : ItemMonoBehaviour
         if(Physics.Raycast(ray, out RaycastHit hit, _maxGrabDistance, layerMask: 1 << 0)
             && hit.rigidbody != null)
         {
-            _pickOffset = hit.rigidbody.worldCenterOfMass - hit.point;
+            _rotationOffset = Quaternion.Inverse(PlayerCamera.transform.rotation) * hit.rigidbody.rotation;
+            _pickOffset = hit.transform.InverseTransformVector(hit.point - hit.transform.position);
             _pickDistance = hit.distance;
             _grabbedObject = hit.rigidbody;
             _grabbedObject.collisionDetectionMode = CollisionDetectionMode.Continuous;

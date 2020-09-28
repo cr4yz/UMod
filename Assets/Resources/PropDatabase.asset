@@ -15,52 +15,55 @@ MonoBehaviour:
   Props:
   - Object: {fileID: 919132149155446097, guid: db8ecebb65c1515418d2de8e94888085, type: 3}
     Name: Dragon
-    Tags: Creatures
+    Tags: creatures
   - Object: {fileID: 919132149155446097, guid: f587f11f16e71de4db62a02a8e47886a, type: 3}
     Name: Arm Chair
-    Tags: Furniture
+    Tags: furniture
   - Object: {fileID: 919132149155446097, guid: 3209d27bf61fd65459a8e77f9be7b013, type: 3}
     Name: Coffee Table
-    Tags: Furniture
+    Tags: furniture
   - Object: {fileID: 919132149155446097, guid: c675df24f1a58b54ca2de0c258abc037, type: 3}
     Name: Female
-    Tags: Humanoids
+    Tags: humanoids
   - Object: {fileID: 919132149155446097, guid: 76e1930d5e3653147af0308fc9164f9e, type: 3}
     Name: Male
-    Tags: Humanoids
+    Tags: humanoids
   - Object: {fileID: 919132149155446097, guid: 5bdd4434e5135834c963430ff80ce3e7, type: 3}
     Name: Mario
-    Tags: Humanoids
+    Tags: humanoids
   - Object: {fileID: 8246813661512011884, guid: 062eac030a59597408bf088e5acc44ad, type: 3}
     Name: Light Ball
-    Tags: Lights
+    Tags: lights
   - Object: {fileID: 2262243045242126335, guid: f481705171f492a4382578ac0f06b837, type: 3}
     Name: Purple Light Ball
-    Tags: Lights
+    Tags: lights
   - Object: {fileID: 5175661517982011210, guid: ed96ba3152a64a843ab2d59280e05404, type: 3}
     Name: Capsule
-    Tags: Primitives
+    Tags: primitives
   - Object: {fileID: 6807632635754644258, guid: 4f3da6ca7996a264a95bcf61eb9df620, type: 3}
     Name: Cube
-    Tags: Primitives
+    Tags: primitives
   - Object: {fileID: 2557624160726137275, guid: 6f382eda8cb6f3041948c8e09b807adb, type: 3}
     Name: Cylinder
-    Tags: Primitives
+    Tags: primitives
   - Object: {fileID: 5468029084845777556, guid: 24d6c7ca7f302464c9cf20946026f2da, type: 3}
     Name: Mirror
-    Tags: Primitives
+    Tags: primitives
   - Object: {fileID: 3765178448752508061, guid: 704c47ebb0e78e148b0a6502630f07fc, type: 3}
     Name: Sphere
-    Tags: Primitives
+    Tags: primitives
   - Object: {fileID: 919132149155446097, guid: adcd27831cac557449b4d6104923fd15, type: 3}
     Name: 1967 Shelby Mustang
-    Tags: Vehicles
+    Tags: vehicles
   - Object: {fileID: 919132149155446097, guid: fb3fb3b670cc802469523ab679d76c82, type: 3}
     Name: Steam Train
-    Tags: Vehicles
+    Tags: vehicles
   - Object: {fileID: 919132149155446097, guid: 4af5624ad97e0e04c8ca7d00e307e41f, type: 3}
     Name: mp5k
-    Tags: Weapons
-  - Object: {fileID: 919132149155446097, guid: 15e8fe0673dcf8e4c90bfa240c2ba71d, type: 3}
+    Tags: weapons
+  - Object: {fileID: 7018394010976115966, guid: 0029f28d1b4687e43a7412a9886e89fc, type: 3}
     Name: PhysGun
-    Tags: Weapons
+    Tags: weapons
+  - Object: {fileID: 919132149155446097, guid: 15e8fe0673dcf8e4c90bfa240c2ba71d, type: 3}
+    Name: ToolGun
+    Tags: weapons
