@@ -3,9 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ItemMonoBehaviour : MonoBehaviour
 {
+
+    public UnityEvent OnEquipped = new UnityEvent();
+    public UnityEvent OnUnequipped = new UnityEvent();
+
     [Header("Item Properties")]
     [SerializeField]
     private string _itemName;
@@ -39,6 +44,11 @@ public class ItemMonoBehaviour : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        
+    }
+
     private void OnDisable()
     {
         ReleaseAllInput();
@@ -46,6 +56,8 @@ public class ItemMonoBehaviour : MonoBehaviour
 
     public IEnumerator Show()
     {
+        OnEquipped?.Invoke();
+
         bool complete = false;
         LeanTween.moveLocalY(gameObject, 0f, .25f).setOnComplete(() =>
         {
@@ -60,6 +72,8 @@ public class ItemMonoBehaviour : MonoBehaviour
 
     public IEnumerator Hide()
     {
+        OnUnequipped?.Invoke();
+
         bool complete = false;
         LeanTween.moveLocalY(gameObject, -2f, .25f).setOnComplete(() =>
         {

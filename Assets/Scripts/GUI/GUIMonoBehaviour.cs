@@ -16,6 +16,7 @@ public class GUIMonoBehaviour : MonoBehaviour
     private TMP_InputField[] _inputFields;
 
     public bool IsOpen => _root.activeSelf;
+    public GameObject Root => _root;
 
     protected virtual void Awake()
     {

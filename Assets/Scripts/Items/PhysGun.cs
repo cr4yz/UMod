@@ -89,7 +89,8 @@ public class PhysGun : ItemMonoBehaviour
     {
         var ray = PlayerCamera.ViewportPointToRay(Vector3.one * .5f);
         if(Physics.Raycast(ray, out RaycastHit hit, _maxGrabDistance, layerMask: 1 << 0)
-            && hit.rigidbody != null)
+            && hit.rigidbody != null
+            && !hit.rigidbody.CompareTag("Player"))
         {
             _rotationOffset = Quaternion.Inverse(PlayerCamera.transform.rotation) * hit.rigidbody.rotation;
             _pickOffset = hit.transform.InverseTransformVector(hit.point - hit.transform.position);

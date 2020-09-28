@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ItemManager : MonoBehaviour
 {
-    private ItemMonoBehaviour[] _items;
+
+    public UnityEvent<ItemMonoBehaviour> OnItemEquipped = new UnityEvent<ItemMonoBehaviour>();
+
     private ItemMonoBehaviour _activeItem;
 
     private Dictionary<KeyCode, int> _itemSlots = new Dictionary<KeyCode, int>
@@ -18,10 +21,12 @@ public class ItemManager : MonoBehaviour
         { KeyCode.Alpha6, 6 }
     };
 
+    public ItemMonoBehaviour[] Items { get; private set; }
+
     private void Awake()
     {
-        _items = GetComponentsInChildren<ItemMonoBehaviour>();
-        foreach(var item in _items)
+        Items = GetComponentsInChildren<ItemMonoBehaviour>();
+        foreach(var item in Items)
         {
             item.gameObject.SetActive(false);
         }
@@ -45,7 +50,7 @@ public class ItemManager : MonoBehaviour
 
         if (_activeItem)
         {
-            nextItem = _items
+            nextItem = Items
                 .SkipWhile(x => x != _activeItem)
                 .Skip(1)
                 .FirstOrDefault(x => slot == -1 || x.SlotNumber == slot);
@@ -53,7 +58,7 @@ public class ItemManager : MonoBehaviour
 
         if (!nextItem)
         {
-            nextItem = _items.FirstOrDefault(x => slot == -1 || x.SlotNumber == slot);
+            nextItem = Items.FirstOrDefault(x => slot == -1 || x.SlotNumber == slot);
             if (!nextItem)
             {
                 yield break;
@@ -67,6 +72,7 @@ public class ItemManager : MonoBehaviour
 
         _activeItem = nextItem;
         _activeItem.gameObject.SetActive(true);
+        OnItemEquipped?.Invoke(_activeItem);
         yield return _activeItem.Show();
     }
 
