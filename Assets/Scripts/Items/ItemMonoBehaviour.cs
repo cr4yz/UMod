@@ -18,12 +18,12 @@ public class ItemMonoBehaviour : MonoBehaviour
     [Range(1, 6)]
     private int _slotNumber = 1;
     [SerializeField]
-    protected ViewModel ViewModel;
+    public ViewModel ViewModel;
     [SerializeField]
     private GameObject _worldModelPrefab;
 
     private AnimationEventListener _eventListener;
-    protected Camera PlayerCamera;
+    public Camera PlayerCamera;
 
     private KeyCode[] _itemInputs = new KeyCode[]
     {
@@ -32,6 +32,7 @@ public class ItemMonoBehaviour : MonoBehaviour
     };
     private List<KeyCode> _keysDown = new List<KeyCode>();
 
+    public string ItemName => _itemName;
     public int SlotNumber => _slotNumber;
 
     private void Awake()
@@ -44,12 +45,12 @@ public class ItemMonoBehaviour : MonoBehaviour
         }
     }
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         
     }
 
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         ReleaseAllInput();
     }

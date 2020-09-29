@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class ViewModel : MonoBehaviour
@@ -19,7 +21,7 @@ public class ViewModel : MonoBehaviour
     public Vector3 BarrelPosition => _barrel != null ? _barrel.position : transform.position;
     public Animator Animator { get; private set; }
 
-    private void Start()
+    private void Awake()
     {
         if (!_animationTarget)
         {
@@ -35,10 +37,13 @@ public class ViewModel : MonoBehaviour
         var swaySpeed = _swaySpeed / _animationTarget.transform.lossyScale.x;
         var swayRecovery = _swayRecovery / _animationTarget.transform.lossyScale.x;
 
-        var swayX = -Input.GetAxisRaw("Mouse X") * Time.deltaTime;
-        _swayOffset.x = Mathf.Clamp(_swayOffset.x + swayX, -maxSway, maxSway);
-        _swayOffset = Vector3.Lerp(_swayOffset, Vector3.zero, swayRecovery * Time.deltaTime);
+        if (!GUIManager.Instance.GUIHasCursor())
+        {
+            var swayX = -Input.GetAxisRaw("Mouse X") * Time.deltaTime;
+            _swayOffset.x = Mathf.Clamp(_swayOffset.x + swayX, -maxSway, maxSway);
+        }
 
+        _swayOffset = Vector3.Lerp(_swayOffset, Vector3.zero, swayRecovery * Time.deltaTime);
         _animationTarget.transform.localPosition = Vector3.MoveTowards(_animationTarget.transform.localPosition, _defaultPosition + _swayOffset, swaySpeed * Time.deltaTime);
     }
 
@@ -60,6 +65,40 @@ public class ViewModel : MonoBehaviour
                 });
             });
         }
+    }
+
+    public IEnumerator FireProjectile(GameObject projectile, Transform target, float speed, Action finishCallback = null)
+    {
+        projectile.transform.position = BarrelPosition;
+        projectile.transform.LookAt(target.transform.position);
+
+        while (target && Vector3.Distance(projectile.transform.position, target.transform.position) > .1f)
+        {
+            projectile.transform.position = Vector3.MoveTowards(projectile.transform.position, target.transform.position, speed * Time.deltaTime);
+            yield return null;
+        }
+
+        GameObject.Destroy(projectile);
+
+        finishCallback?.Invoke();
+    }
+
+    public IEnumerator FireProjectile(GameObject projectile, Vector3 endPoint, float speed, Action finishCallback = null)
+    {
+        projectile.transform.position = BarrelPosition;
+        projectile.transform.LookAt(endPoint);
+        var dir = (endPoint - BarrelPosition).normalized;
+        var velocity = dir * speed;
+
+        while(Vector3.Distance(projectile.transform.position, endPoint) > .1f)
+        {
+            projectile.transform.position = Vector3.MoveTowards(projectile.transform.position, endPoint, speed * Time.deltaTime);
+            yield return null;
+        }
+
+        GameObject.Destroy(projectile);
+
+        finishCallback?.Invoke();
     }
 
 }

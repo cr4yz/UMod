@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &964965324338361761
+--- !u!1 &387396952263481817
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,139 +8,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 964965324338361760}
-  m_Layer: 0
-  m_Name: Tools
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &964965324338361760
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 964965324338361761}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 964965325422776496}
-  - {fileID: 964965325259583430}
-  m_Father: {fileID: 3397336164797207244}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &964965325259583431
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 964965325259583430}
-  - component: {fileID: 1702954610}
-  m_Layer: 0
-  m_Name: Welder
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &964965325259583430
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 964965325259583431}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 964965324338361760}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1702954610
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 964965325259583431}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b86d0d4a4a5edac48b8882b6210b99cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnSelected:
-    m_PersistentCalls:
-      m_Calls: []
-  OnDeselected:
-    m_PersistentCalls:
-      m_Calls: []
-  _toolName: Welder
---- !u!1 &964965325422776497
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 964965325422776496}
-  - component: {fileID: 964965325522058377}
-  m_Layer: 0
-  m_Name: Destroyer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &964965325422776496
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 964965325422776497}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 964965324338361760}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &964965325522058377
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 964965325422776497}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de55f740652bf6344b604152b5a37ebe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnSelected:
-    m_PersistentCalls:
-      m_Calls: []
-  OnDeselected:
-    m_PersistentCalls:
-      m_Calls: []
-  _toolName: Destroyer
---- !u!1 &1077248726446594803
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2506747949551768103}
+  - component: {fileID: 4152624121220562745}
   m_Layer: 6
   m_Name: Barrel
   m_TagString: Untagged
@@ -148,21 +16,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2506747949551768103
+--- !u!4 &4152624121220562745
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1077248726446594803}
+  m_GameObject: {fileID: 387396952263481817}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0.0499, z: 0.1367}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 6706475502420832580}
+  m_Father: {fileID: 7580455927413803382}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &3397336164797207242
+--- !u!1 &1946923187182070520
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -170,41 +38,40 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3397336164797207244}
-  - component: {fileID: 964965324406642419}
+  - component: {fileID: 1946923187182070526}
+  - component: {fileID: 8707336452386499032}
   m_Layer: 0
-  m_Name: ToolGun
+  m_Name: GravityGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3397336164797207244
+--- !u!4 &1946923187182070526
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3397336164797207242}
+  m_GameObject: {fileID: 1946923187182070520}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 7983866675493833635}
-  - {fileID: 964965324338361760}
+  - {fileID: 6552028409244267409}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &964965324406642419
+--- !u!114 &8707336452386499032
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3397336164797207242}
+  m_GameObject: {fileID: 1946923187182070520}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6de9fe4bf7299bb448c4111322c498dc, type: 3}
+  m_Script: {fileID: 11500000, guid: 9af14a53b7c575740bf0c7b17f9a7dee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   OnEquipped:
@@ -213,15 +80,12 @@ MonoBehaviour:
   OnUnequipped:
     m_PersistentCalls:
       m_Calls: []
-  _itemName: 
-  _slotNumber: 2
-  ViewModel: {fileID: 4867363568067927761}
+  _itemName: Gravity Gun
+  _slotNumber: 1
+  ViewModel: {fileID: 8623625893182170851}
   _worldModelPrefab: {fileID: 0}
   PlayerCamera: {fileID: 0}
-  OnToolChanged:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!1 &5991667254174394518
+--- !u!1 &7424099256698507428
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -229,8 +93,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7983866675493833635}
-  - component: {fileID: 4867363568067927761}
+  - component: {fileID: 6552028409244267409}
+  - component: {fileID: 8623625893182170851}
   m_Layer: 6
   m_Name: ViewModel
   m_TagString: Untagged
@@ -238,48 +102,48 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7983866675493833635
+--- !u!4 &6552028409244267409
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5991667254174394518}
+  m_GameObject: {fileID: 7424099256698507428}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 6706475502420832580}
-  m_Father: {fileID: 3397336164797207244}
+  - {fileID: 7580455927413803382}
+  m_Father: {fileID: 1946923187182070526}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4867363568067927761
+--- !u!114 &8623625893182170851
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5991667254174394518}
+  m_GameObject: {fileID: 7424099256698507428}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9459bb5db1bc54c438ffffffb94fbf8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animationTarget: {fileID: 6222285025465297918}
-  _barrel: {fileID: 2506747949551768103}
+  _animationTarget: {fileID: 7095667694110856140}
+  _barrel: {fileID: 4152624121220562745}
   _swaySpeed: 2
   _maxSway: 0.15
   _swayRecovery: 6
---- !u!1001 &6528133216335451823
+--- !u!1001 &7978559937732963997
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 7983866675493833635}
+    m_TransformParent: {fileID: 6552028409244267409}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 1423171333375c74ca49aaaf1f5b0427, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.37099996
+      value: 0.367
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1423171333375c74ca49aaaf1f5b0427, type: 3}
       propertyPath: m_LocalPosition.y
@@ -287,7 +151,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1423171333375c74ca49aaaf1f5b0427, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.5529997
+      value: 0.553
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1423171333375c74ca49aaaf1f5b0427, type: 3}
       propertyPath: m_LocalRotation.x
@@ -336,7 +200,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 1423171333375c74ca49aaaf1f5b0427, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 2e200267462ffd04bb3d44a6034b3c2b, type: 2}
+      objectReference: {fileID: 2100000, guid: 210d9d0e5b6f020418eb8344598d648f, type: 2}
     - target: {fileID: 919132149155446097, guid: 1423171333375c74ca49aaaf1f5b0427, type: 3}
       propertyPath: m_Name
       value: Gun Model
@@ -347,13 +211,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1423171333375c74ca49aaaf1f5b0427, type: 3}
---- !u!1 &6222285025465297918 stripped
+--- !u!1 &7095667694110856140 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1423171333375c74ca49aaaf1f5b0427, type: 3}
-  m_PrefabInstance: {fileID: 6528133216335451823}
+  m_PrefabInstance: {fileID: 7978559937732963997}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &6706475502420832580 stripped
+--- !u!4 &7580455927413803382 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1423171333375c74ca49aaaf1f5b0427, type: 3}
-  m_PrefabInstance: {fileID: 6528133216335451823}
+  m_PrefabInstance: {fileID: 7978559937732963997}
   m_PrefabAsset: {fileID: 0}

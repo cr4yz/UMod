@@ -12,14 +12,17 @@ public class ToolGunTool : MonoBehaviour
 
     public string ToolName => _toolName;
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         OnSelected?.Invoke();
     }
 
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         OnDeselected?.Invoke();
     }
+
+    public virtual void HandleKeyDown(ToolGun toolGun, KeyCode button, Ray eyeRay) { }
+    public virtual void HandleKeyUp(ToolGun toolGun, KeyCode button, Ray eyeRay) { }
 
 }

@@ -22,7 +22,7 @@ public class ItemManagerHudRow : MonoBehaviour
         foreach (var item in items)
         {
             var clone = GameObject.Instantiate(_itemLabelTemplate, _itemLabelTemplate.transform.parent);
-            clone.GetComponentInChildren<TMP_Text>().text = item.name;
+            clone.GetComponentInChildren<TMP_Text>().text = item.ItemName;
             clone.gameObject.SetActive(true);
             var img = clone.GetComponent<Image>();
             item.OnEquipped.AddListener(() =>

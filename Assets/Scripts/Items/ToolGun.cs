@@ -8,6 +8,7 @@ public class ToolGun : ItemMonoBehaviour
     public UnityEvent<ToolGunTool> OnToolChanged = new UnityEvent<ToolGunTool>();
 
     private ToolGunTool _activeTool;
+    private Camera _playerCamera;
 
     public ToolGunTool[] Tools { get; private set; }
 
@@ -19,13 +20,26 @@ public class ToolGun : ItemMonoBehaviour
             tool.gameObject.SetActive(false);
         }
         SelectNextTool();
+        _playerCamera = Camera.allCameras.First(x => x.CompareTag("Player"));
     }
 
     protected override void OnKeyDown(KeyCode button)
     {
-        if (_activeTool)
+        if (!_activeTool)
         {
-        }   
+            return;
+        }
+        ViewModel.Kick();
+        _activeTool.HandleKeyDown(this, button, _playerCamera.ViewportPointToRay(Vector3.one * .5f));
+    }
+
+    protected override void OnKeyUp(KeyCode button)
+    {
+        if (!_activeTool)
+        {
+            return;
+        }
+        _activeTool.HandleKeyUp(this, button, _playerCamera.ViewportPointToRay(Vector3.one * .5f));
     }
 
     protected override void OnScrollDelta(float delta)
@@ -59,6 +73,8 @@ public class ToolGun : ItemMonoBehaviour
         nextTool.gameObject.SetActive(true);
         _activeTool = nextTool;
         OnToolChanged?.Invoke(_activeTool);
+
+        ViewModel.Kick(.5f);
     }
 
 }

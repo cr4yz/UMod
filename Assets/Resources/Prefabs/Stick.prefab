@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 140905554198429193}
   - component: {fileID: 4494308171015561888}
   m_Layer: 0
-  m_Name: Stick 1
+  m_Name: Stick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -217,10 +217,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _itemName: Stick
-  _slotNumber: 1
+  _slotNumber: 3
   ViewModel: {fileID: 140905553926442104}
   _worldModelPrefab: {fileID: 0}
-  _swingCooldown: 0.35
+  PlayerCamera: {fileID: 0}
+  _swingCooldown: 0.28
   _meleeRange: 1.75
   _meleeRadius: 0.25
   _hitForce: 500
