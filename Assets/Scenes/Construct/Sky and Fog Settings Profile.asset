@@ -233,10 +233,10 @@ MonoBehaviour:
   m_AdvancedMode: 0
   maxShadowDistance:
     m_OverrideState: 1
-    m_Value: 150
+    m_Value: 50
     min: 0
   directionalTransmissionMultiplier:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
     min: 0
     max: 1
@@ -246,17 +246,17 @@ MonoBehaviour:
     min: 1
     max: 4
   cascadeShadowSplit0:
-    m_OverrideState: 0
-    m_Value: 0.05
+    m_OverrideState: 1
+    m_Value: 0.296
   cascadeShadowSplit1:
     m_OverrideState: 0
-    m_Value: 0.15
+    m_Value: 0.296
   cascadeShadowSplit2:
     m_OverrideState: 0
     m_Value: 0.3
   cascadeShadowBorder0:
     m_OverrideState: 0
-    m_Value: 0
+    m_Value: 0.033783782
   cascadeShadowBorder1:
     m_OverrideState: 0
     m_Value: 0
@@ -448,17 +448,17 @@ MonoBehaviour:
     m_Value: 1
   tint:
     m_OverrideState: 0
-    m_Value: {r: 1, g: 1, b: 1, a: 1}
+    m_Value: {r: 0, g: 0, b: 0, a: 1}
     hdr: 0
     showAlpha: 1
     showEyeDropper: 1
   intensityMultiplier:
     m_OverrideState: 1
-    m_Value: 4
+    m_Value: 1
     min: 0
   rotation:
     m_OverrideState: 1
-    m_Value: 78
+    m_Value: 92
     min: 0
     max: 360
   enableDistortion:

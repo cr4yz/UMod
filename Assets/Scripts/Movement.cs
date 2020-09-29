@@ -29,8 +29,25 @@ public class Movement : TimeStepMonoBehaviour
     private MovementButtons _buttonsDown;
     private Vector3 _previousOrigin;
 
-    public Vector3 Origin { get; set; }
-    public Vector3 Angles { get; set; }
+    private Vector3 _origin;
+    public Vector3 Origin
+    {
+        get { return _origin; }
+        set { 
+            _origin = value;
+            transform.position = value;
+        }
+    }
+    private Vector3 _angles;
+    public Vector3 Angles
+    {
+        get { return _angles; }
+        set
+        {
+            _angles = value;
+            Camera.transform.eulerAngles = value;
+        }
+    }
     public bool Grounded { get; private set; }
     public bool Surfing { get; private set; }
     public bool JustJumped { get; private set; }
@@ -45,7 +62,7 @@ public class Movement : TimeStepMonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         Origin = transform.position;
-        Angles = transform.rotation.eulerAngles;
+        Angles = Camera.transform.eulerAngles;
     }
 
     protected override void OnFrame()

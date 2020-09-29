@@ -7,11 +7,11 @@ public class ViewModel : MonoBehaviour
     [SerializeField]
     private Transform _barrel;
     [SerializeField]
-    private float _swaySpeed = 2;
+    private float _swaySpeed = .5f;
     [SerializeField]
-    private float _maxSway = 6;
+    private float _maxSway = .15f;
     [SerializeField]
-    private float _swayRecovery = 6f;
+    private float _swayRecovery = 10f;
 
     private Vector3 _swayOffset;
     private Vector3 _defaultPosition;
@@ -31,11 +31,15 @@ public class ViewModel : MonoBehaviour
 
     private void Update()
     {
-        var swayX = -Input.GetAxisRaw("Mouse X") * Time.deltaTime;
-        _swayOffset.x = Mathf.Clamp(_swayOffset.x + swayX, -_maxSway, _maxSway);
-        _swayOffset = Vector3.Lerp(_swayOffset, Vector3.zero, _swayRecovery * Time.deltaTime);
+        var maxSway = _maxSway / _animationTarget.transform.lossyScale.x;
+        var swaySpeed = _swaySpeed / _animationTarget.transform.lossyScale.x;
+        var swayRecovery = _swayRecovery / _animationTarget.transform.lossyScale.x;
 
-        _animationTarget.transform.localPosition = Vector3.MoveTowards(_animationTarget.transform.localPosition, _defaultPosition + _swayOffset, _swaySpeed * Time.deltaTime);
+        var swayX = -Input.GetAxisRaw("Mouse X") * Time.deltaTime;
+        _swayOffset.x = Mathf.Clamp(_swayOffset.x + swayX, -maxSway, maxSway);
+        _swayOffset = Vector3.Lerp(_swayOffset, Vector3.zero, swayRecovery * Time.deltaTime);
+
+        _animationTarget.transform.localPosition = Vector3.MoveTowards(_animationTarget.transform.localPosition, _defaultPosition + _swayOffset, swaySpeed * Time.deltaTime);
     }
 
     private bool _kickCanRotate = true;
@@ -48,9 +52,9 @@ public class ViewModel : MonoBehaviour
         if (_kickCanRotate)
         {
             _kickCanRotate = false;
-            LeanTween.rotateAroundLocal(_animationTarget, Vector3.right, 5f * intensity, .09f).setOnComplete(() =>
+            LeanTween.rotateAroundLocal(_animationTarget, Vector3.right, -5f * intensity, .09f).setOnComplete(() =>
             {
-                LeanTween.rotateAroundLocal(_animationTarget, Vector3.right, -5f * intensity, .1f).setOnComplete(() =>
+                LeanTween.rotateAroundLocal(_animationTarget, Vector3.right, 5f * intensity, .1f).setOnComplete(() =>
                 {
                     _kickCanRotate = true;
                 });

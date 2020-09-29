@@ -117,7 +117,7 @@ public class PhysGun : ItemMonoBehaviour
     // https://www.codinblack.com/how-to-draw-lines-circles-or-anything-else-using-linerenderer/
     void DrawQuadraticBezierCurve(LineRenderer line, Vector3 point0, Vector3 point1, Vector3 point2)
     {
-        line.positionCount = 10;
+        line.positionCount = 20;
         float t = 0f;
         Vector3 B = new Vector3(0, 0, 0);
         for (int i = 0; i < line.positionCount; i++)

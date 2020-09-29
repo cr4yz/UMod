@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class EntityComponentCache
 {
@@ -11,9 +9,9 @@ public class EntityComponentCache
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
 public class EntityComponentAttribute : Attribute
 {
-    public EntityComponentAttribute(string name)
+    public EntityComponentAttribute(params string[] classNames)
     {
-        Name = name;
+        ClassNames = classNames;
     }
-    public readonly string Name;
+    public readonly string[] ClassNames;
 }

@@ -27,11 +27,11 @@ public class ItemManagerHudRow : MonoBehaviour
             var img = clone.GetComponent<Image>();
             item.OnEquipped.AddListener(() =>
             {
-                LeanTween.alpha(img.rectTransform, 1, 0.25f);
+                LeanTween.alpha(img.rectTransform, 1, 0.05f);
             });
             item.OnUnequipped.AddListener(() =>
             {
-                LeanTween.alpha(img.rectTransform, 0, 0.25f);
+                LeanTween.alpha(img.rectTransform, 0, 0.05f);
             });
         }
     }

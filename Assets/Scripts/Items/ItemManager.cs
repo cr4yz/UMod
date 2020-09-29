@@ -48,12 +48,12 @@ public class ItemManager : MonoBehaviour
     {
         ItemMonoBehaviour nextItem = null;
 
-        if (_activeItem)
+        if (_activeItem && _activeItem.SlotNumber == slot)
         {
             nextItem = Items
                 .SkipWhile(x => x != _activeItem)
                 .Skip(1)
-                .FirstOrDefault(x => slot == -1 || x.SlotNumber == slot);
+                .FirstOrDefault(x => x.SlotNumber == slot);
         }
 
         if (!nextItem)

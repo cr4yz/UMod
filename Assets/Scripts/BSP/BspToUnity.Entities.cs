@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using UnityEngine;
-using SourceUtils.ValveBsp.Entities;
 
 public partial class BspToUnity
 {
@@ -18,12 +17,15 @@ public partial class BspToUnity
                 if (attributes.Length > 0)
                 {
                     var targetAttribute = attributes.First() as EntityComponentAttribute;
-                    if (EntityComponentCache.Registrations.ContainsKey(targetAttribute.Name))
+                    foreach(var className in targetAttribute.ClassNames)
                     {
-                        Debug.LogError("Duplicate entity component: " + targetAttribute.Name);
-                        continue;
+                        if (EntityComponentCache.Registrations.ContainsKey(className))
+                        {
+                            Debug.LogError("Duplicate entity component: " + className);
+                            continue;
+                        }
+                        EntityComponentCache.Registrations.Add(className, currentType);
                     }
-                    EntityComponentCache.Registrations.Add(targetAttribute.Name, currentType);
                 }
             }
         }
