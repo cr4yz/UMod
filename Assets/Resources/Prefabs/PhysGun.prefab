@@ -184,6 +184,7 @@ MonoBehaviour:
   _slotNumber: 1
   ViewModel: {fileID: 5685908577689929767}
   _worldModelPrefab: {fileID: 0}
+  PlayerCamera: {fileID: 0}
   _maxGrabDistance: 40
   _minGrabDistance: 1
   _pickLine: {fileID: 2468533227761342833}
@@ -319,15 +320,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1423171333375c74ca49aaaf1f5b0427, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1423171333375c74ca49aaaf1f5b0427, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1423171333375c74ca49aaaf1f5b0427, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 1423171333375c74ca49aaaf1f5b0427, type: 3}
       propertyPath: m_Materials.Array.data[0]

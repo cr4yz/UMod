@@ -22,6 +22,9 @@ MonoBehaviour:
   - Object: {fileID: 919132149155446097, guid: 3209d27bf61fd65459a8e77f9be7b013, type: 3}
     Name: Coffee Table
     Tags: Furniture
+  - Object: {fileID: 124598771765779569, guid: 444f10af2df31144ea07065a08d0d2d4, type: 3}
+    Name: Dummy T-Pose
+    Tags: Humanoids
   - Object: {fileID: 919132149155446097, guid: c675df24f1a58b54ca2de0c258abc037, type: 3}
     Name: Female
     Tags: Humanoids

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PhysGun : ItemMonoBehaviour
@@ -104,14 +105,63 @@ public class PhysGun : ItemMonoBehaviour
         }
     }
 
-    private void Release(bool setKinematic = false)
+    private void Release(bool freeze = false)
     {
         _grabbedObject.collisionDetectionMode = CollisionDetectionMode.Discrete;
         _grabbedObject.useGravity = true;
         _grabbedObject.freezeRotation = false;
-        _grabbedObject.isKinematic = setKinematic;
-        _grabbedObject = null;
+        _grabbedObject.isKinematic = false;
         _pickLine.gameObject.SetActive(false);
+
+        if (freeze)
+        {
+            Freeze(_grabbedObject);
+        }
+        else
+        {
+            Unfreeze(_grabbedObject);
+        }
+
+        _grabbedObject = null;
+    }
+
+    private Dictionary<Rigidbody, Rigidbody> _jointSwaps = new Dictionary<Rigidbody, Rigidbody>();
+    private void Freeze(Rigidbody rb)
+    {
+        if(rb.TryGetComponent(out CharacterJoint characterJoint))
+        {
+            var fixedJointObject = GameObject.Instantiate(rb.gameObject, rb.transform.parent);
+            var fixedJoint = fixedJointObject.AddComponent<FixedJoint>();
+            fixedJoint.connectedBody = characterJoint.connectedBody;
+            fixedJoint.connectedAnchor = characterJoint.connectedAnchor;
+            fixedJoint.massScale = characterJoint.massScale;
+            fixedJoint.connectedMassScale = characterJoint.connectedMassScale;
+            fixedJoint.GetComponent<Rigidbody>().isKinematic = true;
+            _jointSwaps.Add(fixedJoint.GetComponent<Rigidbody>(), rb);
+
+            rb.gameObject.SetActive(false);
+        }
+        rb.isKinematic = true;
+    }
+
+    private void Unfreeze(Rigidbody rb)
+    {
+        if (_jointSwaps.ContainsKey(rb))
+        {
+            _jointSwaps[rb].gameObject.SetActive(true);
+            _jointSwaps[rb].isKinematic = false;
+            _jointSwaps[rb].transform.localPosition = rb.transform.localPosition;
+            _jointSwaps[rb].transform.localScale = rb.transform.localScale;
+            _jointSwaps[rb].transform.localRotation = rb.transform.localRotation;
+            _jointSwaps[rb].GetComponent<CharacterJoint>().connectedAnchor = rb.GetComponent<FixedJoint>().connectedAnchor;
+            _jointSwaps[rb].GetComponent<CharacterJoint>().anchor = rb.GetComponent<FixedJoint>().anchor;
+            GameObject.Destroy(rb.gameObject);
+            _jointSwaps.Remove(rb);
+        }
+        else
+        {
+            rb.isKinematic = false;
+        }
     }
 
     // https://www.codinblack.com/how-to-draw-lines-circles-or-anything-else-using-linerenderer/
