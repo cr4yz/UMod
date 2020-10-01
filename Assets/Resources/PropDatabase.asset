@@ -34,6 +34,9 @@ MonoBehaviour:
   - Object: {fileID: 919132149155446097, guid: 5bdd4434e5135834c963430ff80ce3e7, type: 3}
     Name: Mario
     Tags: Humanoids
+  - Object: {fileID: 3298232773511826621, guid: 0896628f1f1d8d44e9fe6cdd2553e9c7, type: 3}
+    Name: Ortiz T-Pose
+    Tags: Humanoids
   - Object: {fileID: 8246813661512011884, guid: 062eac030a59597408bf088e5acc44ad, type: 3}
     Name: Light Ball
     Tags: Lights

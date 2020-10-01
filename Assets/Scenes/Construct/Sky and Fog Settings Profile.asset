@@ -242,7 +242,7 @@ MonoBehaviour:
     max: 1
   cascadeShadowSplitCount:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 3
     min: 1
     max: 4
   cascadeShadowSplit0:
@@ -454,7 +454,7 @@ MonoBehaviour:
     showEyeDropper: 1
   intensityMultiplier:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 3.4
     min: 0
   rotation:
     m_OverrideState: 1

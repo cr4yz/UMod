@@ -69,6 +69,7 @@ public class PropSpawner : GUIMonoBehaviour
         {
             var clone = GameObject.Instantiate<GameObject>(gameObj);
             var rb = clone.GetComponentInChildren<Rigidbody>();
+            clone.AddComponent<PropRoot>();
             if(rb == null)
             {
                 rb = clone.AddComponent<Rigidbody>();
